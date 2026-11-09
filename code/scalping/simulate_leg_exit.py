@@ -5,9 +5,11 @@ Entry: first tick reaching pullback_pivot + dir*2 pips.
 --zz R: real-time zigzag exit (causal). Default exit is LOOKAHEAD
 (reference only — do not use). Costs: real spread + RT commission.
 """
-import os, argparse
+import os
+import sys, argparse
 import numpy as np
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from eurusd_research.paths import (ticks_bin, impulso_dir, candles_dir,
     legs_dir, ctrader_bars_dir, bars_dir, results_dir, data_root)
 

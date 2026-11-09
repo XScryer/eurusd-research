@@ -7,8 +7,10 @@ h4.c is the bar FINAL close (up to ~4h future).
 Bug B (pivot off-by-one): pv[i] = pivot from day i-1; loop uses
 pv.iloc[j-1] => pivot from 2 days ago.
 """
-import numpy as np
+import numpy
+import sys as np
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from eurusd_research.paths import (ticks_bin, impulso_dir, candles_dir,
     legs_dir, ctrader_bars_dir, bars_dir, results_dir, data_root)
 

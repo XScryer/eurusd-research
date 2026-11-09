@@ -4,8 +4,10 @@ VECTORIZED. Impulse: W-min window, |displacement|>=D pips, >=70%
 candles in direction, final streak >=C candles. Optional ADX(14) M1.
 Measures forward momentum/fade returns at +5/+10/+15/+30 min.
 """
-import numpy as np
+import numpy
+import sys as np
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from eurusd_research.paths import (ticks_bin, impulso_dir, candles_dir,
     legs_dir, ctrader_bars_dir, bars_dir, results_dir, data_root)
 

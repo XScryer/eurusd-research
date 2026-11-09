@@ -7,8 +7,10 @@ zone [high[i-1], low[i+1]]. Long: M15 close above EMA20/50 + pullback
 touches zone + bullish reaction bar. SL = zone bottom -2 pips.
 TP = +20 pips. Short: mirror. Bar-level sim, SL first on tie.
 """
-import numpy as np
+import numpy
+import sys as np
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from eurusd_research.paths import (ticks_bin, impulso_dir, candles_dir,
     legs_dir, ctrader_bars_dir, bars_dir, results_dir, data_root)
 

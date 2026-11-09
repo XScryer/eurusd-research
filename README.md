@@ -57,15 +57,21 @@ python code/measure_bar_exhaustion.py
 python code/measure_drop_continuation.py
 python code/measure_volatility_persistence.py
 
-# verify the regime classifier is causal
+# verify the regime classifier is causal + shipped bars load
 python tests/test_regime_opinion.py
+python tests/test_bars.py
+
+# tick-pipeline smoke test on the shipped 2-month real-tick sample
+export EURUSD_TICKS_BIN=$PWD/data/ticks_sample
+python code/scalping/extract_impulse_events.py --anos 2025 --combos 2,60,1.5
+python code/scalping/simulate_impulse.py --K 2 --W 60 --R 1.5 --stop 3 --take 6
 ```
 
-The tick-level pipeline (`code/scalping/`, `code/audit/`) needs the real
-tick archive — ~1.5 GB of `BID_<year>.npz`/`ASK_<year>.npz` produced by
-[XScryer/tick-replay](https://github.com/XScryer/tick-replay). Set
-`EURUSD_TICKS_BIN` to that directory and the scripts regenerate the event
-pickles documented in `docs/tick-level-scalping.md`.
+See `code/README.md` for the full data-requirements matrix. Extra bar data
+(cTrader M1, MT5 M5) lives in the **`data-extra-v1` release** as
+`.csv.gz` assets; the full ~1.5 GB tick archive is produced by
+[XScryer/tick-replay](https://github.com/XScryer/tick-replay) — point
+`EURUSD_TICKS_BIN` at its output to regenerate every tick-level number.
 
 ## Scope and honest limitations
 

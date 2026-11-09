@@ -6,8 +6,10 @@ SHORT: close near R1/P/R2, close < MA200, StochRSI %K > OB, bearish
 engulfing. Entry next bar open. SL = signal high + buf. Fixed ~9-pip
 TP + runner to S1. Costs ~0.6 pip RT.
 """
-import numpy as np
+import numpy
+import sys as np
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from eurusd_research.paths import (ticks_bin, impulso_dir, candles_dir,
     legs_dir, ctrader_bars_dir, bars_dir, results_dir, data_root)
 

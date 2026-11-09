@@ -11,7 +11,8 @@ data/
   bars/<TF>/EURUSD_<TF>_spread.csv   per-bar spread in price units
   ctrader/EURUSD_M15_ctrader_*.csv   M15 bars built from cTrader ticks, UTC
   results/                           measurement outputs cited by the docs
-  ticks_bin/                         (NOT in git — see below)
+  ticks_sample/                      2 months of real ticks (2025-06/07), smoke tests
+  ticks_bin/                         (NOT in git — full archive, see below)
   impulso/  candle/  pernadas/       (NOT in git — event pickles, see below)
 ```
 
@@ -26,19 +27,35 @@ data/
 - Included: M15, M30, H1, H4, D1 (~1999→2026, weekday bars only — Saturday
   bars in the old history are weekend leftovers and are dropped).
 - **Not in git**: M1 (~774 MB) and M5 (~164 MB) exceed comfortable repo
-  sizes. To reproduce `measure_cost_by_timeframe.py`'s M5 row, export M5
-  from your own MT5 (`tools/` in the `mt5-backtest-runner` repo shows the
-  CSV format) or resample from tick data — place the files under
-  `data/bars/M5/` with the same naming.
+  sizes. Both are in the **`data-extra-v1` release** as `.csv.gz` assets
+  (~54 MB total): decompress `EURUSD_M5_export.csv.gz` +
+  `EURUSD_M5_spread.csv.gz` into `data/bars/M5/` for the M5 row of
+  `measure_cost_by_timeframe.py`, or export M5 from your own MT5 (the
+  `mt5-backtest-runner` repo shows the CSV format).
+
+## `ticks_sample/` — real ticks for smoke tests
+
+`BID_2025.npz` / `ASK_2025.npz` = ~4M real cTrader ticks covering
+2025-06-01 → 2025-08-01 (UTC, `ts` ms + `px`). Enough to run the whole
+tick pipeline end-to-end:
+
+```bash
+export EURUSD_TICKS_BIN=$PWD/data/ticks_sample
+python code/scalping/extract_impulse_events.py --anos 2025 --combos 2,60,1.5
+python code/scalping/simulate_impulse.py --K 2 --W 60 --R 1.5 --stop 3 --take 6
+```
 
 ## `ctrader/` — bars from real ticks
 
 M15 bars aggregated from cTrader tick data (bid), timestamps already UTC,
 covering 2020-01→2026-10 in two files. Used by the scalping pipeline and
-the retail-strategy screens. The full tick archive (~1.5 GB of
-`BID_<year>.npz`/`ASK_<year>.npz`) is produced by
-[XScryer/tick-replay](https://github.com/XScryer/tick-replay) — point
-`EURUSD_TICKS_BIN` at the output directory to run the tick-level code.
+the retail-strategy screens. The **M1 bars** used by `code/retail/` and
+`code/audit/` are in the `data-extra-v1` release
+(`EURUSD_M1_ctrader_2020-01-01_2026-10-22.csv.gz` → decompress here).
+The full tick archive (~1.5 GB of `BID_<year>.npz`/`ASK_<year>.npz`) is
+produced by [XScryer/tick-replay](https://github.com/XScryer/tick-replay)
+— point `EURUSD_TICKS_BIN` at the output directory to run the tick-level
+code on the full history.
 
 ## `results/` — published measurement outputs
 

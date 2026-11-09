@@ -11,8 +11,10 @@ Long: near support (S1/P/S2), candle crosses EMA12 up, H4 bullish
 SL = nearest pivot below -2 pips. TP = entry + 1.7*(entry-SL).
 Short: mirror. RSI(14) M5: long RSI<55, short RSI>45.
 """
-import numpy as np
+import numpy
+import sys as np
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from eurusd_research.paths import (ticks_bin, impulso_dir, candles_dir,
     legs_dir, ctrader_bars_dir, bars_dir, results_dir, data_root)
 

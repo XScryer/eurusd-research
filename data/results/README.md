@@ -26,12 +26,15 @@ audited trade by trade.
 
 | File | What it is |
 |---|---|
-| `crivo_regime.csv` | regime-gate screen results per parameterization/period |
-| `regime_diario.csv` | daily regime labels/features (~3 MB) |
-| `regime_intraday.csv` | intraday (M15) regime labels/features (~3 MB) |
+| `crivo_regime.csv` | regime-gate parameter screen (per K/pers/threshold × period: blocked/allowed trade counts and P&L) |
+| `regime_diario.csv` | daily feature table for the regime predictability study (1999→, ~3 MB) |
+| `regime_intraday.csv` | intraday (M15-derived) feature table for the same study (~3 MB) |
 
-`eurusd_research.regime_opinion.opiniao_regime` reproduces the classifier;
-these files are its published output on the full history for cross-checking.
+These are the *feature/label tables* behind `docs/regime-detection.md`'s
+predictability claims — inputs to the study, not the classifier output.
+`eurusd_research.regime_opinion.opiniao_regime` reproduces the M15-bar
+classifier itself; its gate effect is what the `replay_ticks_*` books above
+audit.
 
 ## Not published
 
