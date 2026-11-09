@@ -1,13 +1,18 @@
-# eurusd-research
+# EURUSD Research
 
 **What works and what doesn't in EURUSD strategy research — measured, not
 debated.**
 
-This repository publishes ~13 years of systematic EURUSD research: the
-market facts that survived real costs and real ticks, the mechanisms that
-were falsified, the backtest traps that produced phantom profits, and the
-code to reproduce all of it. It is research, **not financial advice** —
-nothing here is a recommendation to trade.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](requirements.txt)
+[![Data](https://img.shields.io/badge/data-M15%E2%86%92D1%20%2B%20ticks-orange.svg)](data/README.md)
+[![Reproduce](https://img.shields.io/badge/reproduce-bar%20%2B%20tick%20scripts-brightgreen.svg)](code/README.md)
+
+~13 years of systematic EURUSD research: the market facts that survived
+real costs and real ticks, the mechanisms that were falsified, the
+backtest traps that produced phantom profits, and the code to reproduce
+all of it. It is research, **not financial advice** — nothing here is a
+recommendation to trade.
 
 ## The one-paragraph summary
 
@@ -21,6 +26,20 @@ live edge is real but small and regime-dependent (~+1%/yr at realistic
 account size). Five popular YouTube retail strategies were mechanically
 tested — all dead; one was a lookahead artifact worth +$380 that became
 −$195 when fixed.
+
+## Findings at a glance
+
+- **Sub-5-pip / seconds-to-minutes EURUSD is efficient** — zero exploitable
+  edge after costs across every event family tested on ~13 years of real
+  ticks (impulse, flow, range-edge, market-making, zigzag).
+- **Volatility is predictable; direction is not** — ATR14 → next-day range
+  r = +0.63; every direction feature |r| < 0.04.
+- **A causal regime classifier improves a fade strategy 9/9 test cells** —
+  but it's a damage filter, not a profit engine (~+1%/yr realistic).
+- **The live edge is regime-dependent** — positive 2025–26, negative
+  2020–24 on real ticks.
+- **5 YouTube retail strategies: all dead** — one was a +$380 lookahead
+  artifact that became −$195 when fixed.
 
 ## Repository map
 
